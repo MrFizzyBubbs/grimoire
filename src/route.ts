@@ -7,7 +7,8 @@ export function getTasks<A extends string, T extends Task<A> = Task<A>>(
   const result: T[] = [];
   for (const quest of quests) {
     const questCompleted = quest.completed;
-    for (const task of quest.tasks) {
+    for (let task of quest.tasks) {
+      task = { ...task };
       // Include quest name in task names and dependencies (unless dependency quest is given)
       task.name = `${quest.name}/${task.name}`;
       task.after = task.after?.map((after) =>
